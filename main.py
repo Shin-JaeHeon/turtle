@@ -8,6 +8,7 @@ t.hideturtle()
 turtle.title("원그리기 그래프")
 
 
+# Y축 좌표
 def y_line(k):
     t.goto(10, k)
     t.penup()
@@ -19,6 +20,7 @@ def y_line(k):
     t.goto(0, k)
 
 
+# X축 좌표
 def x_line(g):
     t.goto(g, -10)
     t.penup()
@@ -30,6 +32,7 @@ def x_line(g):
     t.goto(g, 0)
 
 
+# 원 생성
 def create_circle(x1, y1, r1, text):
     t.hideturtle()
     t.penup()
@@ -42,10 +45,12 @@ def create_circle(x1, y1, r1, text):
     t.goto(0, 0)
 
 
+# 기본 모드
 def resets():
     reset(0, 0, -1, 0, 0, -1, False)
 
 
+# 관찰 모드
 def lim():
     msg.showinfo("Lim 모드는", "x또는 y의 시작값부터 x또는 y의 종료값까지 원을 움직이며, r의 시작값부터 종료값까지 크기가 커집니다.")
     msg.showerror("경고! 사용자 및 관찰자의 건강을 해칠 수 있습니다!", "광 과민성 발작등이 발생하거나 어지럼증등이 발생할 수있습니다.\n반드시 밝은 곳에서 봐주시기 바랍니다.")
@@ -65,6 +70,7 @@ def lim():
     Y2 = turtle.numinput("숫자를 입력하세요", "작은 원의 중심좌표 Y의 종료값", -100)
     R2 = turtle.numinput("숫자를 입력하세요", "작은 원의 반지름 R의 종료값", 300)
     V = turtle.numinput("표시 횟수", "표시 횟수를 입력하세요\n표시횟수가 높을 수록 좀 더 세세하게 변화합니다.", 100)
+    # 사용자 입력 End
     t0 = x1
     t1 = y1
     t2 = r1
@@ -72,12 +78,15 @@ def lim():
     t4 = Y1
     t5 = R1
     temp = 0
+    # 초기값 설정 End
     v = int((x2 - x1) / V)
     v1 = int((y2 - y1) / V)
     v2 = int((r2 - r1) / V)
     v3 = int((X2 - X1) / V)
     v4 = int((Y2 - Y1) / V)
     v5 = int((R2 - R1) / V)
+    # 이동값 설정 End
+    # 루프
     while temp < V:
         t0 += v
         t1 += v1
@@ -89,10 +98,12 @@ def lim():
         temp += 1
 
 
+# 기본 모드
 def reset(x, y, r, X, Y, R, mode):
     t.reset()
     t.hideturtle()
     t.speed(0)
+    # Lim 모드가 아니면
     if not mode:
         x = turtle.numinput("숫자를 입력하세요", "큰원의 중심좌표 x", 0)
         y = turtle.numinput("숫자를 입력하세요", "큰원의 중심좌표 y", 0)
@@ -101,6 +112,7 @@ def reset(x, y, r, X, Y, R, mode):
         Y = turtle.numinput("숫자를 입력하세요", "작은 원의 중심좌표 Y", 0)
         R = turtle.numinput("숫자를 입력하세요", "작은 원의 반지름 R", 300)
     text1 = "중심 좌표"
+    # 좌표계는 기본 모드에서만 입력
     if not mode:
         a = 1
         b = 1
@@ -123,6 +135,7 @@ def reset(x, y, r, X, Y, R, mode):
         text1 = "두 원의 중심 좌표"
     create_circle(x, y, r, text1)
     create_circle(X, Y, R, text1)
+    # 기본 모드에서만 표시
     if not mode:
         dis = math.sqrt((X - x) ** 2 + (Y - y) ** 2)
         if dis == r + R:
